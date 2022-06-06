@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "trip")
@@ -15,6 +15,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
+    @Id
     private int idTrip;
 
     /*Связь многие к одному.
@@ -31,15 +32,15 @@ public class Trip {
     @JoinColumn(name = "id_comp")
     //Переменная куда сохраняем внешний объект
     private Company company;
+    @Column(name = "plane", columnDefinition = "bpchar")
     private String plane;
     @Column(name = "town_from")
     private String townFrom;
     @Column(name = "town_to")
     private String townTo;
     @Column(name = "time_out")
-    private String timeOut;
+    private long timeOut;
     @Column(name = "time_in")
-    private String timeIn;
-
+    private long timeIn;
 
 }

@@ -1,5 +1,12 @@
 package org.services;
 
+import org.models.Passenger;
+import org.models.Trip;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Реализация логики работы с абстрактной БД (+ обработка информации полученной из БД
  * или загружаемую в БД, по необходимости) согласно интерфейсу IDAO.
@@ -8,6 +15,13 @@ package org.services;
  * объекто реализующий работу с конкретной БД.
  */
 public class DataBaseService {
-    private IDAO currentDAOImpl = new PostgreDAO();
+    private static IDAO currentDAOImpl = new PostgreDAO();
 
+    public static Set<Passenger> getAllPsg() {
+        return currentDAOImpl.getAllPsg();
+    }
+
+    public static Set<Trip> getAllTrips() {
+        return currentDAOImpl.getAllTrips();
+    }
 }

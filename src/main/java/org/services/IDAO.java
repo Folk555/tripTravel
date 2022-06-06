@@ -1,5 +1,11 @@
 package org.services;
 
+import org.models.Passenger;
+import org.models.Trip;
+
+import java.util.List;
+import java.util.Set;
+
 /**
  * Интерфейс Data Access Object
  * От него наследуются классы по обработке БД (в зависимости от конкретной БД).
@@ -8,4 +14,7 @@ package org.services;
  */
 
 public interface IDAO {
+    Set<Passenger> getAllPsg();
+    Set<Trip> getAllTrips();
+
 }

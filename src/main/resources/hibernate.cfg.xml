@@ -18,6 +18,5 @@
         <property name="hbm2ddl.auto">validate</property>
         <!-- cache settings -->
 
-
     </session-factory>
 </hibernate-configuration>

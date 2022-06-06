@@ -1,23 +1,21 @@
 package org.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "company")
 public class Company {
     // @Column не обязательно так как переменная имеет то же название
-    @Column(name = "id_column")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_comp")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_comp;
     @Getter
     @Setter
+    @Column(columnDefinition = "bpchar")
     private String name;
 
 }
