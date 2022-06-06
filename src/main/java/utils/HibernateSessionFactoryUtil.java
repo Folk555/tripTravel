@@ -3,6 +3,7 @@ package utils;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.models.Company;
 
 public class HibernateSessionFactoryUtil {
     private static SessionFactory sessionFactory;
@@ -13,6 +14,8 @@ public class HibernateSessionFactoryUtil {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
+                //Подключаем класс к ORM
+                //configuration.addAnnotatedClass(Company.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
             } catch (Exception e) {
