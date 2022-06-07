@@ -18,4 +18,10 @@ public class Company {
     @Column(columnDefinition = "bpchar")
     private String name;
 
+    @Override
+    public String toString() {
+        return "Company{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

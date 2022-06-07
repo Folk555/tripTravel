@@ -21,7 +21,15 @@ public class DataBaseService {
         return currentDAOImpl.getAllPsg();
     }
 
-    public static Set<Trip> getAllTrips() {
+    public static List<Trip> getAllTrips() {
         return currentDAOImpl.getAllTrips();
+    }
+
+    public static void getAllPass() {
+        currentDAOImpl.getAllPass();
+    }
+
+    public static Passenger getPsgById(int id) {
+        return currentDAOImpl.getPsgById(id);
     }
 }

@@ -15,6 +15,8 @@ import java.util.Set;
 
 public interface IDAO {
     Set<Passenger> getAllPsg();
-    Set<Trip> getAllTrips();
+    List<Trip> getAllTrips();
+    void getAllPass();
+    Passenger getPsgById(int id);
 
 }

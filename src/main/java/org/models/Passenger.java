@@ -12,6 +12,7 @@ public class Passenger {
     @Column(name = "id_psg")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private int idPsg;
     @Getter
     @Setter

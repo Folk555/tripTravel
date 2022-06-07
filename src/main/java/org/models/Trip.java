@@ -7,12 +7,15 @@ import lombok.Setter;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "trip")
 @Data
 public class Trip {
     @Column(name = "trip_no")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Id
@@ -27,20 +30,32 @@ public class Trip {
          применяется у владеемого (на который ссылаются) объекта,
          благодоря ему можно получить ссылающиеся объекты.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     //@JoinColumn атрибут этого объекта, который ссылается на внешний объект
     @JoinColumn(name = "id_comp")
     //Переменная куда сохраняем внешний объект
     private Company company;
     @Column(name = "plane", columnDefinition = "bpchar")
     private String plane;
-    @Column(name = "town_from")
+    @Column(name = "town_from", columnDefinition = "bpchar")
     private String townFrom;
-    @Column(name = "town_to")
+    @Column(name = "town_to", columnDefinition = "bpchar")
     private String townTo;
-    @Column(name = "time_out")
-    private long timeOut;
-    @Column(name = "time_in")
-    private long timeIn;
+    @Column(name = "time_out", columnDefinition = "timestamp")
+    private LocalDateTime timeOut;
+    @Column(name = "time_in", columnDefinition = "timestamp")
+    private LocalDateTime timeIn;
 
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "idTrip=" + idTrip +
+                "comp=" + company +
+                ", plane='" + plane + '\'' +
+                ", townFrom='" + townFrom + '\'' +
+                ", townTo='" + townTo + '\'' +
+                ", timeOut=" + timeOut +
+                ", timeIn=" + timeIn +
+                '}';
+    }
 }

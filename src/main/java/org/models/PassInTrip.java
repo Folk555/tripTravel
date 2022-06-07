@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "pass_in_trip")
 public class PassInTrip {
@@ -13,7 +15,8 @@ public class PassInTrip {
     private Trip tripNo;
 
     @Id
-    private long date;
+    @Column(columnDefinition = "timestamp")
+    private LocalDateTime date;
 
     @Id
     @ManyToOne
@@ -21,6 +24,7 @@ public class PassInTrip {
     private Passenger passenger;
 
     @Getter @Setter
+    @Column(columnDefinition = "bpchar")
     private String place;
 
 }
