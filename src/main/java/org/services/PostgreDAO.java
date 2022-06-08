@@ -2,11 +2,14 @@ package org.services;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.models.Company;
+import org.models.PassInTrip;
 import org.models.Passenger;
 import org.models.Trip;
 import utils.HibernateSessionFactoryUtil;
@@ -39,7 +42,23 @@ public class PostgreDAO implements IDAO {
 
         Query<Passenger> query = session.createQuery(cr);
         Passenger results = query.getSingleResult();
+        session.close();
         return results;
+    }
+
+    @Override
+    public void updatePsg(Passenger psg) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaUpdate<Passenger> criteriaUpdate = cb.createCriteriaUpdate(Passenger.class);
+        Root<Passenger> root = criteriaUpdate.from(Passenger.class);
+        criteriaUpdate.set("name", psg.getName());
+        criteriaUpdate.where(cb.equal(root.get("idPsg"), psg.getIdPsg()));
+
+        Transaction transaction = session.beginTransaction();
+        session.createMutationQuery(criteriaUpdate).executeUpdate();
+        transaction.commit();
+        session.close();
     }
 
     public List<Trip> getAllTrips() {
@@ -56,10 +75,33 @@ public class PostgreDAO implements IDAO {
         return allTrips;
     }
 
-    public void getAllPass() {
+    public void printAllPass() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<PassInTrip> cr = cb.createQuery(PassInTrip.class);
+        Root<PassInTrip> root = cr.from(PassInTrip.class);
+        cr.select(root);
 
+        Query<PassInTrip> query = session.createQuery(cr);
+        query.getResultStream().forEach(System.out::println);
+        session.close();
+    }
 
+    public void insertPsg(Passenger psg) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.persist(psg);
+        session.getTransaction().commit();
+        session.close();
+    }
 
+    @Override
+    public void deletePsg(Passenger psg) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.remove(psg);
+        session.getTransaction().commit();
+        session.close();
     }
 
 }

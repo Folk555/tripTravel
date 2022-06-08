@@ -21,6 +21,7 @@ public class PassInTrip {
     @Id
     @ManyToOne
     @JoinColumn(name = "id_psg")
+    @Setter @Getter
     private Passenger passenger;
 
     @Getter @Setter

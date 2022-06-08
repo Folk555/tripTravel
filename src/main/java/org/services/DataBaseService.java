@@ -3,7 +3,6 @@ package org.services;
 import org.models.Passenger;
 import org.models.Trip;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -25,11 +24,17 @@ public class DataBaseService {
         return currentDAOImpl.getAllTrips();
     }
 
-    public static void getAllPass() {
-        currentDAOImpl.getAllPass();
+    public static void printAllPass() {
+        currentDAOImpl.printAllPass();
     }
 
     public static Passenger getPsgById(int id) {
         return currentDAOImpl.getPsgById(id);
     }
+
+    public static void updatePsg(Passenger psg) {currentDAOImpl.updatePsg(psg);}
+
+    public static void insertPsg(Passenger psg) {currentDAOImpl.insertPsg(psg);}
+
+    public static void deletePsg(Passenger psg) {currentDAOImpl.deletePsg(psg);}
 }
